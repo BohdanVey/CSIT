@@ -19,7 +19,7 @@ $.ajax(settings).done(function (response) {
 
 function post(user,email, psw,type){
 	psw=MD5(psw);
-var jsondata = {"User":user ,"Type": type,"e-mail":email,"password":psw,"Visit":[]};
+var jsondata = {"user":user ,"type": type,"e-mail":email,"password":psw,"visit":[]};
 var settings = {
   "async": true,
   "crossDomain": true,

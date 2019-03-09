@@ -10,4 +10,5 @@ function registerUser() {
 		type=1;
 	}
 	post(user,email, password,type);
+	window.location.href = 'index.html';
 };	
