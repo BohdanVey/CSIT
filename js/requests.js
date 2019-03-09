@@ -17,7 +17,7 @@ $.ajax(settings).done(function (response) {
 });
 }
 
-function post(email, login, psw,type){
+function post(user,email, psw,type){
 	psw=MD5(psw);
 var jsondata = {"User":user ,"Type": type,"e-mail":email,"password":psw,"Visit":[]};
 var settings = {
