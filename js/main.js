@@ -5,10 +5,10 @@ $(document).ready(function(e) {
 	$("#logout").hide();
 
     /* auth */
-	let login = localStorage.getItem("login_ec");
+	let user = localStorage.getItem("user_ec");
 	let password = localStorage.getItem("password_ec");
 	let result = checkUser(login, password);
-	if( login === null || password === null || result.length == 0) {
+	if( user === null || password === null || result.length == 0) {
 		$("#signout").toggle();
 	}
 	else{
@@ -20,7 +20,7 @@ $(document).ready(function(e) {
 
 	// logot button
 	$("#logout").click(()=>{
-		localStorage.removeItem("login_ec");
+		localStorage.removeItem("user_ec");
 		localStorage.removeItem("password_ec");
 		window.location.href = 'login.html';
 	});
