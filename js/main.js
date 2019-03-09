@@ -11,11 +11,11 @@ $(document).ready(function(e) {
 	if( login === null || password === null || result.length == 0) {
 		$("#unlogin").toggle();
 	}
-	if( login === null || password === null || result.length == 0) {
+	else{
 		$("#login").toggle();
 		$("#logout").toggle();
 	}
-	user = result[0]; // set user
+	user = result[0]; 
 
 
 	// logot button
