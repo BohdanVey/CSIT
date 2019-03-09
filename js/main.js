@@ -7,7 +7,7 @@ $(document).ready(function(e) {
     /* auth */
 	let user = localStorage.getItem("user_ec");
 	let password = localStorage.getItem("password_ec");
-	let result = checkUser(login, password);
+	let result = checkUser(user, password);
 	if( user === null || password === null || result.length == 0) {
 		$("#signout").toggle();
 	}
