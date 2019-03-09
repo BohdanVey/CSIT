@@ -9,5 +9,5 @@ function loginUser() {
 	}
 	localStorage.setItem('user_ec', login);
 	localStorage.setItem('password_ec', MD5(password));
-
+window.location.href = 'index.html';
 };
