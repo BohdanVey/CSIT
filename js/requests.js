@@ -40,6 +40,7 @@ $.ajax(settings).done(function (response) {
 }
 function checkUser(user, md5_password){
 	let result = [];
+	console.log(user,md5_password);
 	let settings = {
 		"async": false,
 		"crossDomain": true,
