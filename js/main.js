@@ -1,7 +1,7 @@
 $(document).ready(function(e) {
 	
-	$("#login").hide();
-    $("#unlogin").hide();
+	$("#signin").hide();
+    $("#signout").hide();
 	$("#logout").hide();
 
     /* auth */
@@ -9,10 +9,10 @@ $(document).ready(function(e) {
 	let password = localStorage.getItem("password_ec");
 	let result = checkUser(login, password);
 	if( login === null || password === null || result.length == 0) {
-		$("#unlogin").toggle();
+		$("#signout").toggle();
 	}
 	else{
-		$("#login").toggle();
+		$("#signin").toggle();
 		$("#logout").toggle();
 	}
 	user = result[0]; 
