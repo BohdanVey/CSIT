@@ -56,5 +56,5 @@ function checkUser(user, md5_password){
 	$.ajax(settings).done(function (response) {
 		result = response;
 	});
-	return result;
+		return result;
 }	

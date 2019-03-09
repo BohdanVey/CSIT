@@ -7,7 +7,7 @@ function loginUser() {
 		console.log(result);
 		return;
 	}
-	localStorage.setItem('login_ec', login);
+	localStorage.setItem('user_ec', login);
 	localStorage.setItem('password_ec', MD5(password));
 	window.location.href = 'index.html';
 };
