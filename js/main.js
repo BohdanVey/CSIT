@@ -14,6 +14,7 @@ $(document).ready(function(e) {
 		$("#signout2").toggle();
 	}
 	else{
+		$("#signin").text(localStorage.getItem("user_ec"));
 		$("#signin").toggle();
 		$("#logout").toggle();
 	}
