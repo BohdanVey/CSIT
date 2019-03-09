@@ -4,7 +4,7 @@ function loginUser() {
 	let password = document.getElementById("password").value;
     let result = checkUser(login, MD5(password));
 	if( login === null || password === null || result.length == 0) {
-		console.log("EEEEE");
+		console.log(result);
 		return;
 	}
 	localStorage.setItem('login_ec', login);
