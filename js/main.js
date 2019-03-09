@@ -2,7 +2,7 @@ $(document).ready(function(e) {
 	
 	$("#login").hide();
     $("#unlogin").hide();
-	$("#logout").toggle();
+	$("#logout").hide();
 
     /* auth */
 	let login = localStorage.getItem("login_ec");
