@@ -2,6 +2,7 @@ $(document).ready(function(e) {
 	
 	$("#signin").hide();
     $("#signout").hide();
+	 $("#signout2").hide();
 	$("#logout").hide();
 
     /* auth */
@@ -10,6 +11,7 @@ $(document).ready(function(e) {
 	let result = checkUser(user, password);
 	if( user === null || password === null || result.length == 0) {
 		$("#signout").toggle();
+		$("#signout2").toggle();
 	}
 	else{
 		$("#signin").toggle();
