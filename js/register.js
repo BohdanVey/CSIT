@@ -9,4 +9,4 @@ function registerUser() {
 		type=1;
 	}
 	post(email, login, password,type);
-};
+};	
