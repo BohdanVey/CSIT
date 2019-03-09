@@ -38,12 +38,12 @@ $.ajax(settings).done(function (response) {
   console.log(response);
 });
 }
-function checkUser(login, md5_password){
+function checkUser(user, md5_password){
 	let result = [];
 	let settings = {
 		"async": false,
 		"crossDomain": true,
-		"url": 'https://csitproject-61e2.restdb.io/rest/csit?q={"user": "' + users + '", "password": "' + md5_password +'"}',
+		"url": 'https://csitproject-61e2.restdb.io/rest/csit?q={"user": "' + user + '", "password": "' + md5_password +'"}',
 		"method": "GET",
 		"headers": {
 			"content-type": "application/json",
