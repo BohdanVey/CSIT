@@ -1,9 +1,19 @@
 let user
 $(document).ready(function(e) {
-
+	function getadress(text){
+		a="https://www.google.com/maps/place/"
+		for(var j=0;j<text.length;j++){
+			if(text[j]==' ')
+				a+='+'
+			else
+				a+=text[j]
+		}
+		return a;
+	}
 	function newdiv(a, k) {
 	let container = document.querySelector("#container");
 	console.log(a);
+	text=getadress(a['place']);
 	container.innerHTML += `<div class="col-lg-14 col-md-16 mb-14">
             <div class="card h-100">
               <a href="#"><img class="card-img-top" src="${a['image']}" alt=""></a>
@@ -13,7 +23,7 @@ $(document).ready(function(e) {
                 </h4>
                 <h5>${a['date']}</h5>
 				  <h5>${a['hourbegin']}-${a['hourend']}</h5>
-				   <a id="href${k}" href="#" ><h5 id="text${k}">${a['place']}</h5></a>
+				   <a id="href${k}" href="${text}" ><h5 id="text${k}">${a['place']}</h5></a>
                 <p class="card-text">${a['description']}</p>
               </div>
               <div class="card-footer bg-white">
@@ -42,20 +52,7 @@ $(document).ready(function(e) {
 	$("#addevent").hide();
     /* maps */
 	var i = 0;
-	for (i=0; i < 3; i++) {
-		let adres="href"+i;
-		let text=document.getElementById("text"+i).textContent;
 
-		a="https://www.google.com/maps/place/"
-		for(var j=0;j<text.length;j++){
-			if(text[j]==' ')
-				a+='+'
-			else
-				a+=text[j]
-		}
-	
-		$("#"+adres).attr("href",a);
-	}
 
 	    /* auth */
 	 user = localStorage.getItem("user_ec");
