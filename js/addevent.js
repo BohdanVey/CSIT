@@ -6,6 +6,6 @@ function addevent() {
 	let hourend=document.getElementById("hourend").value;
 	let place=document.getElementById("place").value;
 	let description=document.getElementById("description").value;
-	postevent(name,date,hoursbegin,hoursend,place,description,image);
+	postevent(name,date,hourbegin,hourend,place,description,image);
 	alert("Ready");
 };	
