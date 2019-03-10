@@ -22,7 +22,7 @@ $(document).ready(function(e) {
                   <a href="#">${a['name']}</a>
                 </h4>
                 <h5>${a['date']}</h5>
-				  <h5>${a['hourbegin']}-${a['hourend']}</h5>
+				  <h5>${a['hoursBegin']}-${a['hoursEnd']}</h5>
 				   <a id="href${k}" href="${text}" ><h5 id="text${k}">${a['place']}</h5></a>
                 <p class="card-text">${a['description']}</p>
               </div>
