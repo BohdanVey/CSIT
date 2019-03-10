@@ -37,7 +37,9 @@ $(document).ready(function(e) {
 		$("#logout").toggle();
 	}
 	user = result[0]; 
-	console.log(result)
+	if(user.type===1){
+		$("#addevent").toggle();
+	}
 
 	// logot button
 	$("#logout").click(()=>{
