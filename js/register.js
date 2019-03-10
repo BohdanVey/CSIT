@@ -10,7 +10,7 @@ function registerUser() {
 		type=1;
 	}
 	post(user,email, password,type);
-		localStorage.setItem('user_ec', login);
+		localStorage.setItem('user_ec', user);
 	localStorage.setItem('password_ec', MD5(password));
 	setTimeout(() => {window.location.href = 'index.html';}, 2000);
 };	
