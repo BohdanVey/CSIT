@@ -1,12 +1,22 @@
 let user
+	function visitThis(name){
+		a=getByName(name);
+		for(let i=0;i<a[0]['visit'];i++){
+			if(a[0]['visit'][i]===name)
+				return;
+		}
+		a[0]['visit'] = [a[0]['visit'], user['user']];
+		
+		updateEvent(a);
+	}
 $(document).ready(function(e) {
 	function getadress(text){
 		a="https://www.google.com/maps/place/"
 		for(var j=0;j<text.length;j++){
 			if(text[j]==' ')
-				a+='+'
+				a+='+';
 			else
-				a+=text[j]
+				a+=text[j];
 		}
 		return a;
 	}
@@ -17,7 +27,7 @@ $(document).ready(function(e) {
 	container.innerHTML += `<div class="col-lg-14 col-md-16 mb-14">
             <div class="card h-100">
               <a href="#"><img class="card-img-top" src="${a['image']}" alt=""></a>
-              <div class="card-body">
+              <div class="card-body" id="${'div'+k}">
                 <h4 class="card-title">
                   <a href="#">${a['name']}</a>
                 </h4>
@@ -25,12 +35,20 @@ $(document).ready(function(e) {
 				  <h5>${a['hoursBegin']}-${a['hoursEnd']}</h5>
 				   <a id="href${k}" href="${text}" ><h5 id="text${k}">${a['place']}</h5></a>
                 <p class="card-text">${a['description']}</p>
-              </div>
-              <div class="card-footer bg-white">
+              	<button onclick="visitThis('${a['name']}')" id="btn${k}" class="button">Visit</button>
+				</div>
+               <div class="card-footer bg-white">
               </div>
             </div>
           </div>
+`	
+	let q="#div"+k;
+	let divk = document.querySelector(q);
+	for(let i=0;i<a['visit'].length;i++){
+		divk.innerHTML+=`
+	<div class="col-lg-14 col-md-16 mb-14" id="visitors">${a['visit'][i]}</div>
 `
+	}
 	hr="href"+k;
 	k+=1;
 	console.log(hr,document.getElementById(hr)	);

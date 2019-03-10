@@ -77,7 +77,7 @@ function checkUser(user, md5_password){
 		return result;
 }	
 function postevent(name,date,hoursBegin,hoursEnd,place,description,image){
-var jsondata = {"name": name,"date": date,"hoursBegin":hoursBegin,"hoursEnd":hoursEnd,"place":place,"description":description,"image":image};
+var jsondata = {"name": name,"date": date,"hoursBegin":hoursBegin,"hoursEnd":hoursEnd,"place":place,"description":description,"image":image,"visit":' '};
 var settings = {
   "async": true,
   "crossDomain": true,
@@ -92,6 +92,50 @@ var settings = {
   "data": JSON.stringify(jsondata)
 }
 
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+}
+
+function getByName(name){
+	let result = [];
+	let settings = {
+		"async": false,
+		"crossDomain": true,
+		"url": 'https://csitproject-61e2.restdb.io/rest/event?q={"name": "' + name + '"}',
+		"method": "GET",
+		"headers": {
+			"content-type": "application/json",
+			"x-apikey": "5c83f68fcac6621685acbd15",
+			"cache-control": "no-cache"
+		}
+	}
+
+	$.ajax(settings).done(function (response) {
+		result = response;
+		console.log(response);
+	});
+		return result;
+}	
+function updateEvent(event){
+	event=event[0];
+	event["visit"]=JSON.stringify(event["visit"]);
+	
+var jsondata = {"name": event["name"],"date": event["date"],"hoursBegin": event["hoursBegin"],"hoursEnd": event["hoursEnd"],"place": event["place"],"description": event["description"],"image": event["image"],"visit": event["visit"]};
+	console.log(event["_id"]);
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://csitproject-61e2.restdb.io/rest/event/"+ event["_id"] ,
+  "method": "PUT",
+  "headers": {
+    "content-type": "application/json",
+    "x-apikey": "5c83f68fcac6621685acbd15",
+    "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": JSON.stringify(jsondata)
+}
 $.ajax(settings).done(function (response) {
   console.log(response);
 });
