@@ -58,3 +58,23 @@ function checkUser(user, md5_password){
 	});
 		return result;
 }	
+function postevent(name,date,hoursBegin,hoursEnd,place,description,image){
+var jsondata = {"name": name,"date": date,"hoursBegin":hoursBegin,"hoursEnd":hoursEnd,"place":place,"description":description,"image":image};
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://csitproject-61e2.restdb.io/rest/event",
+  "method": "POST",
+  "headers": {
+    "content-type": "application/json",
+    "x-apikey": "5c83f68fcac6621685acbd15",
+    "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": JSON.stringify(jsondata)
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+}
