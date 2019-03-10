@@ -77,7 +77,7 @@ function checkUser(user, md5_password){
 		return result;
 }	
 function postevent(name,date,hoursBegin,hoursEnd,place,description,image){
-var jsondata = {"name": name,"date": date,"hoursBegin":hoursBegin,"hoursEnd":hoursEnd,"place":place,"description":description,"image":image,"visit":' '};
+var jsondata = {"name": name,"date": date,"hoursBegin":hoursBegin,"hoursEnd":hoursEnd,"place":place,"description":description,"image":image,"visit":[]};
 var settings = {
   "async": true,
   "crossDomain": true,
@@ -119,7 +119,6 @@ function getByName(name){
 }	
 function updateEvent(event){
 	event=event[0];
-	event["visit"]=JSON.stringify(event["visit"]);
 	
 var jsondata = {"name": event["name"],"date": event["date"],"hoursBegin": event["hoursBegin"],"hoursEnd": event["hoursEnd"],"place": event["place"],"description": event["description"],"image": event["image"],"visit": event["visit"]};
 	console.log(event["_id"]);
