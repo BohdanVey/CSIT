@@ -1,5 +1,6 @@
 function addevent() {
 	let image=document.getElementById("image").files.name;
+	console.log(image);
     let name = document.getElementById("name").value;
 	let date = document.getElementById("date").value;
 	let hourbegin = document.getElementById("hourbegin").value;
