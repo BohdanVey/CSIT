@@ -4,13 +4,13 @@ $(document).ready(function(e) {
     $("#signout").hide();
 	 $("#signout2").hide();
 	$("#logout").hide();
-	
-    /* auth */
+	$("#addevent").hide();
+    /* maps */
 	var i = 0;
 	for (i=0; i < 3; i++) {
 		let adres="href"+i;
 		let text=document.getElementById("text"+i).textContent;
-		console.log(adres)
+
 		a="https://www.google.com/maps/place/"
 		for(var j=0;j<text.length;j++){
 			if(text[j]==' ')
@@ -18,9 +18,11 @@ $(document).ready(function(e) {
 			else
 				a+=text[j]
 		}
-		console.log(a)
+	
 		$("#"+adres).attr("href",a);
 	}
+
+	    /* auth */
 	let user = localStorage.getItem("user_ec");
 	let password = localStorage.getItem("password_ec");
 	let result = checkUser(user, password);
@@ -34,7 +36,7 @@ $(document).ready(function(e) {
 		$("#logout").toggle();
 	}
 	user = result[0]; 
-
+	console.log(result)
 
 	// logot button
 	$("#logout").click(()=>{
