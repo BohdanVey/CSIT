@@ -1,3 +1,4 @@
+let user
 $(document).ready(function(e) {
 	
 	$("#signin").hide();
@@ -23,7 +24,7 @@ $(document).ready(function(e) {
 	}
 
 	    /* auth */
-	let user = localStorage.getItem("user_ec");
+	 user = localStorage.getItem("user_ec");
 	let password = localStorage.getItem("password_ec");
 	let result = checkUser(user, password);
 	if( user === null || password === null || result.length == 0) {
