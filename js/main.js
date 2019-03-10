@@ -1,5 +1,39 @@
 let user
 $(document).ready(function(e) {
+
+	function newdiv(a, k) {
+	let container = document.querySelector("#container");
+	console.log(a);
+	container.innerHTML += `<div class="col-lg-14 col-md-16 mb-14">
+            <div class="card h-100">
+              <a href="#"><img class="card-img-top" src="${a['image']}" alt=""></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="#">${a['name']}</a>
+                </h4>
+                <h5>${a['date']}</h5>
+				  <h5>${a['hourbegin']}-${a['hourend']}</h5>
+				   <a id="href${k}" href="#" ><h5 id="text${k}">${a['place']}</h5></a>
+                <p class="card-text">${a['description']}</p>
+              </div>
+              <div class="card-footer bg-white">
+              </div>
+            </div>
+          </div>
+`
+	hr="href"+k;
+	k+=1;
+	console.log(hr,document.getElementById(hr)	);
+}
+	
+	getAllEvent(
+	(response) => {
+		for(let i=0;i<response.length;i++){
+			newdiv(response[i], i);
+		}
+	});	
+	
+	
 	
 	$("#signin").hide();
     $("#signout").hide();
