@@ -16,6 +16,47 @@ $.ajax(settings).done(function (response) {
   console.log(response);
 });
 }
+
+function getByEmail(email){
+	let result = [];
+	let settings = {
+		"async": false,
+		"crossDomain": true,
+		"url": 'https://csitproject-61e2.restdb.io/rest/csit?q={"e-mail": "' + email + '"}',
+		"method": "GET",
+		"headers": {
+			"content-type": "application/json",
+			"x-apikey": "5c83f68fcac6621685acbd15",
+			"cache-control": "no-cache"
+		}
+	}
+
+	$.ajax(settings).done(function (response) {
+		result = response;
+	});
+	return result;
+}
+function getByLogin(user){
+	let result = [];
+	let settings = {
+		"async": false,
+		"crossDomain": true,
+		"url": 'https://csitproject-61e2.restdb.io/rest/csit?q={"user": "' + user + '"}',
+		"method": "GET",
+		"headers": {
+			"content-type": "application/json",
+			"x-apikey": "5c83f68fcac6621685acbd15",
+			"cache-control": "no-cache"
+		}
+	}
+
+	$.ajax(settings).done(function (response) {
+		result = response;
+	});
+	return result;
+}
+
+
 function getAllEvent(callback) {
 var settings = {
   "async": true,
