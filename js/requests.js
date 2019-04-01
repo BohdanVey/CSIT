@@ -136,6 +136,8 @@ var settings = {
   "data": JSON.stringify(jsondata)
 }
 $.ajax(settings).done(function (response) {
-  console.log(response);
+	let x=document.querySelector(a['getId']);
+	
+	
 });
 }

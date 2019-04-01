@@ -1,13 +1,24 @@
 let user
-	function visitThis(name){
+	function addToK(k,text){
+		let q="#div"+k;
+	let divk = document.querySelector(q);
+		divk.innerHTML+=`
+	<div class="col-lg-14 col-md-16 mb-14" id="visitors">${text}</div>
+`
+	}
+	function visitThis(name,k){
 		a=getByName(name);
-		for(let i=0;i<a[0]['visit'];i++){
-			if(a[0]['visit'][i]===name)
-				return;
-		}
-		a[0]['visit'] = [a[0]['visit'], user['user']];
+
+		for(let i=0;i<a[0]['visit'].length;i++){
 		
+			if(a[0]['visit'][i]===user['user']){
+				alert("Error");
+				return;
+			}
+		}
+			a[0]['visit'].push(user['user']);
 		updateEvent(a);
+		addToK(k,user['user']);
 	}
 $(document).ready(function(e) {
 	function getadress(text){
@@ -35,7 +46,7 @@ $(document).ready(function(e) {
 				  <h5>${a['hoursBegin']}-${a['hoursEnd']}</h5>
 				   <a id="href${k}" href="${text}" ><h5 id="text${k}">${a['place']}</h5></a>
                 <p class="card-text">${a['description']}</p>
-              	<button onclick="visitThis('${a['name']}')" id="btn${k}" class="button">Visit</button>
+              	<button onclick="visitThis('${a['name']}',${k})" id="btn${k}" class="button">Visit</button>
 				</div>
                <div class="card-footer bg-white">
               </div>
@@ -45,9 +56,7 @@ $(document).ready(function(e) {
 	let q="#div"+k;
 	let divk = document.querySelector(q);
 	for(let i=0;i<a['visit'].length;i++){
-		divk.innerHTML+=`
-	<div class="col-lg-14 col-md-16 mb-14" id="visitors">${a['visit'][i]}</div>
-`
+		addToK(k,a['visit'][i]);
 	}
 	hr="href"+k;
 	k+=1;
