@@ -21,6 +21,7 @@ let user
 		addToK(k,user['user']);
 	}
 $(document).ready(function(e) {
+		$("#wait-alert").show();
 	function getadress(text){
 		a="https://www.google.com/maps/place/"
 		for(var j=0;j<text.length;j++){
@@ -77,6 +78,7 @@ $(document).ready(function(e) {
 	 $("#signout2").hide();
 	$("#logout").hide();
 	$("#addevent").hide();
+		$("#wait-alert").hide();
     /* maps */
 	var i = 0;
 

@@ -1,7 +1,9 @@
 $(document).ready(function(e) {	
 $("#wrong-alert").hide();
+	$("#wait-alert").hide();
 });
 function registerUser() {
+	$("#wait-alert").show();
     let email = document.getElementById("email").value;
 	let user = document.getElementById("name").value;
 	let password = document.getElementById("password").value;
@@ -24,6 +26,7 @@ function registerUser() {
 		$("#wrong-alert").show();
 		return;
 	}
+	$("#wait-alert").show();
 	post(user,email, password,type);
 		localStorage.setItem('user_ec', user);
 	localStorage.setItem('password_ec', MD5(password));
