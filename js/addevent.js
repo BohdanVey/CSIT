@@ -19,7 +19,7 @@ function addevent() {
 			let place=document.getElementById("place").value;
 			let description=document.getElementById("description").value;
 			postevent(name,date,hourbegin,hourend,place,description,image);
-			alert("Ready");
+		setTimeout(() => {window.location.href = 'index.html';}, 2000);
 	  }
 	);
 };	

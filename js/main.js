@@ -1,9 +1,13 @@
+function time(k){
+	x="#wrong-alert"+k;
+	setTimeout(() => {$(x).hide();}, 2000);
+}
 let user
 	function addToK(k,text){
 		let q="#div"+k;
 	let divk = document.querySelector(q);
 		divk.innerHTML+=`
-	<div class="col-lg-14 col-md-16 mb-14" id="visitors">${text}</div>
+	<div class="col-lg-14 col-md-16 mb-14" id="visitor">${text}</div>
 `
 	}
 	function visitThis(name,k){
@@ -12,7 +16,8 @@ let user
 		for(let i=0;i<a[0]['visit'].length;i++){
 		
 			if(a[0]['visit'][i]===user['user']){
-				alert("Error");
+				$("#wrong-alert"+k).show();
+				time(k);
 				return;
 			}
 		}
@@ -21,6 +26,7 @@ let user
 		addToK(k,user['user']);
 	}
 $(document).ready(function(e) {
+		
 		$("#wait-alert").show();
 	function getadress(text){
 		a="https://www.google.com/maps/place/"
@@ -47,14 +53,20 @@ $(document).ready(function(e) {
 				  <h5>${a['hoursBegin']}-${a['hoursEnd']}</h5>
 				   <a id="href${k}" href="${text}" ><h5 id="text${k}">${a['place']}</h5></a>
                 <p class="card-text">${a['description']}</p>
-              	<button onclick="visitThis('${a['name']}',${k})" id="btn${k}" class="button">Visit</button>
+				<h5>VISITORS:</h5>
 				</div>
+  			<button onclick="visitThis('${a['name']}',${k})" id="btn${k}" class="button" >Visit</button>
+					<div class="alert alert-danger my-alert" role="alert" id="${"wrong-alert"+k}">You already visit this</div>
                <div class="card-footer bg-white">
               </div>
-            </div>
+            
+</div>
+			  
           </div>
 `	
+	$("#wrong-alert"+k).hide();
 	let q="#div"+k;
+	let alertq="#wrong-alert"+k;
 	let divk = document.querySelector(q);
 	for(let i=0;i<a['visit'].length;i++){
 		addToK(k,a['visit'][i]);
@@ -63,6 +75,7 @@ $(document).ready(function(e) {
 	k+=1;
 	console.log(hr,document.getElementById(hr)	);
 }
+	
 	
 	getAllEvent(
 	(response) => {
