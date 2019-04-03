@@ -83,7 +83,7 @@ f.innerHTML+=`
 	let container = document.querySelector("#container");
 	console.log(a);
 	text=getadress(a['place']);
-	container.innerHTML += `<div class="col-lg-14 col-md-16 mb-14">
+	container.innerHTML += `<div class="col-lg-14 col-md-16 mb-14 full-width" >
             <div class="card h-100">
               <a href="#"><img class="card-img-top" src="${a['image']}" alt=""></a>
               <div class="card-body" id="${'div'+k}">
