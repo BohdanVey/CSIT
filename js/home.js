@@ -1,3 +1,8 @@
+	function addnewfriends(text){
+			addfriend(user,text);
+		console.log(text);
+			$("."+text).hide();
+	};
 $(document).ready(function(e) { 
 	$("#signin").hide();
     $("#signout").hide();
@@ -18,17 +23,37 @@ $(document).ready(function(e) {
 		$("#addevent").toggle();
 	
 	
-		//events
-		function addToK(k,text){
+//events
+
+		function addToK(k,text,i){
 		let q="#div"+k;
+		let friend="N"+k+"friend"+i;
 	let divk = document.querySelector(q);
+	
 		divk.innerHTML+=`
+	<div class="${friend} friend"></div>
+`
+let friends=".N"+k+"friend"+i;
+console.log(friend,friends);
+			
+let f = document.querySelector(friends);
+f.innerHTML+=`
 	<div class="col-lg-14 col-md-16 mb-14" id="visitor">${text}</div>
 `
+for(let i=0;i<user['friend'].length;i++){
+if(user['friend'][i]===text || text===user['user'])
+	return;
+}
+if(text===user['user'])
+	return;
+f.innerHTML+=`
+<button class="buttonfriend button4 ${text}" onclick="addnewfriends('${text}')" id="${text}">Add to friend</button>
+`
+
 	}
 	function have(a){
 		for(let i=0;i<a['visit'].length;i++){
-			console.log(a['visit'][i]+' '+user['user']);
+		
 			if(a['visit'][i]===user['user'])
 				return true;
 		}
@@ -43,8 +68,18 @@ $(document).ready(function(e) {
 				a+=text[j];
 		}
 		return a;
+	};
+	function find(a,text){
+		for(let i=0;i<a['visit'].length;i++){
+			if(a['visit'][i]===text)
+				return false;
+		}
+		return true;
 	}
-	function newdiv(a, k) {
+		function newdiv(a, k) {
+	if(find(a,user['user'])){
+		return;
+	}
 	let container = document.querySelector("#container");
 	console.log(a);
 	text=getadress(a['place']);
@@ -61,6 +96,7 @@ $(document).ready(function(e) {
                 <p class="card-text">${a['description']}</p>
 				<h5>VISITORS:</h5>
 				</div>
+					<div class="alert alert-danger my-alert" role="alert" id="${"wrong-alert"+k}">You already visit this</div>
                <div class="card-footer bg-white">
               </div>
             
@@ -73,19 +109,21 @@ $(document).ready(function(e) {
 	let alertq="#wrong-alert"+k;
 	let divk = document.querySelector(q);
 	for(let i=0;i<a['visit'].length;i++){
-		addToK(k,a['visit'][i]);
+		addToK(k,a['visit'][i],i);
 	}
 	hr="href"+k;
 	k+=1;
 }
-	
-		getAllEvent(
+getAllEvent(
 	(response) => {
 		for(let i=0;i<response.length;i++){
-			if(have(response[i],user))
-			newdiv(response[i],i);
+			
+			newdiv(response[i], i);
 		}
 	});	
+	
+	
+	
 	$("#wait-alert").hide();
 	// end events
 });

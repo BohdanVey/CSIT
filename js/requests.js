@@ -16,7 +16,6 @@ $.ajax(settings).done(function (response) {
   console.log(response);
 });
 }
-
 function getByEmail(email){
 	let result = [];
 	let settings = {
@@ -78,7 +77,7 @@ $.ajax(settings).done(function (response) {
 
 function post(user,email, psw,type){
 	psw=MD5(psw);
-var jsondata = {"user":user ,"type": type,"e-mail":email,"password":psw,"visit":[' ']};
+var jsondata = {"user":user ,"type": type,"e-mail":email,"password":psw,"friend":[]};
 var settings = {
   "async": true,
   "crossDomain": true,
@@ -138,6 +137,30 @@ $.ajax(settings).done(function (response) {
 });
 }
 
+
+function addfriend(user,text){
+
+user['friend'].push(text);
+var jsondata = {"user":user['user'] ,"type": user['type'],"e-mail":user['email'],"password":user['password'],"friend":user['friend']};
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://csitproject-61e2.restdb.io/rest/csit/"+ user["_id"] ,
+  "method": "PUT",
+  "headers": {
+    "content-type": "application/json",
+    "x-apikey": "5c83f68fcac6621685acbd15",
+    "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": JSON.stringify(jsondata)
+}
+$.ajax(settings).done(function (response) {
+	let x=document.querySelector(a['getId']);
+});
+}
+
+
 function getByName(name){
 	let result = [];
 	let settings = {
@@ -158,6 +181,8 @@ function getByName(name){
 	});
 		return result;
 }	
+
+
 function updateEvent(event){
 	event=event[0];
 	

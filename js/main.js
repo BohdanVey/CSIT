@@ -3,11 +3,35 @@ function time(k){
 	setTimeout(() => {$(x).hide();}, 2000);
 }
 let user
-	function addToK(k,text){
+	function addnewfriends(text){
+			addfriend(user,text);
+
+			$("."+text).hide();
+	};
+	function addToK(k,text,i){
 		let q="#div"+k;
+		let friend="N"+k+"friend"+i;
 	let divk = document.querySelector(q);
+	
 		divk.innerHTML+=`
+	<div class="${friend} friend"></div>
+`
+let friends=".N"+k+"friend"+i;
+console.log(friend,friends);
+			
+let f = document.querySelector(friends);
+f.innerHTML+=`
 	<div class="col-lg-14 col-md-16 mb-14" id="visitor">${text}</div>
+`
+for(let i=0;i<user['friend'].length;i++){
+if(user['friend'][i]===text )
+	return;
+}
+console.log(text,user['user']);
+if(text===user['user'])
+	return;
+f.innerHTML+=`
+<button class="buttonfriend button4 ${text}" onclick="addnewfriends('${text}')" id="${text}">Add to friend</button>
 `
 	}
 	function visitThis(name,k){
@@ -69,14 +93,12 @@ $(document).ready(function(e) {
 	let alertq="#wrong-alert"+k;
 	let divk = document.querySelector(q);
 	for(let i=0;i<a['visit'].length;i++){
-		addToK(k,a['visit'][i]);
+		addToK(k,a['visit'][i],i);
 	}
 	hr="href"+k;
 	k+=1;
 }
-	
-	
-	getAllEvent(
+getAllEvent(
 	(response) => {
 		for(let i=0;i<response.length;i++){
 			newdiv(response[i], i);
