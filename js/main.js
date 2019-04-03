@@ -73,7 +73,6 @@ $(document).ready(function(e) {
 	}
 	hr="href"+k;
 	k+=1;
-	console.log(hr,document.getElementById(hr)	);
 }
 	
 	
