@@ -1,31 +1,14 @@
+function time(k){
+	x="#wrong-alert"+k;
+	setTimeout(() => {$(x).hide();}, 2000);
+}
+let user
 	function addnewfriends(text){
 			addfriend(user,text);
-		console.log(text);
+
 			$("."+text).hide();
 	};
-$(document).ready(function(e) { 
-	$("#signin").hide();
-    $("#signout").hide();
-	 $("#signout2").hide();
-	$("#logout").hide();
-	$("#addevent").hide();
-	
-	user = localStorage.getItem("user_ec");
-	let password = localStorage.getItem("password_ec");
-	let result = checkUser(user, password);
-	if( user === null || password === null || result.length == 0) {
-	window.location.href = 'login.html';	
-	}
-		$("#signin").text(localStorage.getItem("user_ec"));
-		$("#signin").toggle();
-		$("#logout").toggle();
-	user = result[0]; 
-		$("#addevent").toggle();
-	
-	
-//events
-
-		function addToK(k,text,i){
+	function addToK(k,text,i){
 		let q="#div"+k;
 		let friend="N"+k+"friend"+i;
 	let divk = document.querySelector(q);
@@ -41,25 +24,35 @@ f.innerHTML+=`
 	<div class="col-lg-14 col-md-16 mb-14" id="visitor">${text}</div>
 `
 for(let i=0;i<user['friend'].length;i++){
-if(user['friend'][i]===text || text===user['user'])
+if(user['friend'][i]===text )
 	return;
 }
+console.log(text,user['user']);
 if(text===user['user'])
 	return;
 f.innerHTML+=`
 <button class="buttonfriend button4 ${text}" onclick="addnewfriends('${text}')" id="${text}">Add to friend</button>
 `
-
 	}
-	function have(a){
-		for(let i=0;i<a['visit'].length;i++){
+	function visitThis(name,k){
+		a=getByName(name);
+
+		for(let i=0;i<a[0]['visit'].length;i++){
 		
-			if(a['visit'][i]===user['user'])
-				return true;
+			if(a[0]['visit'][i]===user['user']){
+				$("#wrong-alert"+k).show();
+				time(k);
+				return;
+			}
 		}
-		return false;
-	};
-		function getadress(text){
+			a[0]['visit'].push(user['user']);
+		updateEvent(a);
+		addToK(k,user['user']);
+	}
+$(document).ready(function(e) {
+		
+		$("#wait-alert").show();
+	function getadress(text){
 		a="https://www.google.com/maps/place/"
 		for(var j=0;j<text.length;j++){
 			if(text[j]==' ')
@@ -68,16 +61,17 @@ f.innerHTML+=`
 				a+=text[j];
 		}
 		return a;
-	};
-	function find(a,text){
+	}
+	function find(a,user){
 		for(let i=0;i<a['visit'].length;i++){
-			if(a['visit'][i]===text)
+			for(let j=0;j<user['friend'].length;j++ )
+			if(a['visit'][i]===user['friend'][j])
 				return false;
 		}
 		return true;
 	}
-		function newdiv(a, k) {
-	if(find(a,user['user'])){
+	function newdiv(a, k) {
+		if(find(a,user)){
 		return;
 	}
 	let container = document.querySelector("#container");
@@ -96,6 +90,7 @@ f.innerHTML+=`
                 <p class="card-text">${a['description']}</p>
 				<h5>VISITORS:</h5>
 				</div>
+  			<button onclick="visitThis('${a['name']}',${k})" id="btn${k}" class="button " >Visit</button>
 					<div class="alert alert-danger my-alert" role="alert" id="${"wrong-alert"+k}">You already visit this</div>
                <div class="card-footer bg-white">
               </div>
@@ -123,6 +118,40 @@ getAllEvent(
 	
 	
 	
-	$("#wait-alert").hide();
-	// end events
+	$("#signin").hide();
+    $("#signout").hide();
+	 $("#signout2").hide();
+	$("#logout").hide();
+	$("#addevent").hide();
+		$("#wait-alert").hide();
+    /* maps */
+	var i = 0;
+
+
+	    /* auth */
+	 user = localStorage.getItem("user_ec");
+	let password = localStorage.getItem("password_ec");
+	let result = checkUser(user, password);
+	if( user === null || password === null || result.length == 0) {
+		$("#signout").toggle();
+		$("#signout2").toggle();
+	}
+	else{
+		$("#signin").text(localStorage.getItem("user_ec"));
+		$("#signin").toggle();
+		$("#logout").toggle();
+	}
+	user = result[0]; 
+	if(user.type===1){
+		$("#addevent").toggle();
+	}
+
+	// logot button
+	$("#logout").click(()=>{
+		localStorage.removeItem("user_ec");
+		localStorage.removeItem("password_ec");
+		window.location.href = 'login.html';
+	});
+    
+    
 });

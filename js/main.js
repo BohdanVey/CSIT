@@ -79,7 +79,7 @@ $(document).ready(function(e) {
                 <p class="card-text">${a['description']}</p>
 				<h5>VISITORS:</h5>
 				</div>
-  			<button onclick="visitThis('${a['name']}',${k})" id="btn${k}" class="button" >Visit</button>
+  			<button onclick="visitThis('${a['name']}',${k})" id="btn${k}" class="button " >Visit</button>
 					<div class="alert alert-danger my-alert" role="alert" id="${"wrong-alert"+k}">You already visit this</div>
                <div class="card-footer bg-white">
               </div>
