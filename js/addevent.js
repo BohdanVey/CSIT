@@ -18,8 +18,11 @@ function addevent() {
 			let hourend=document.getElementById("hourend").value;
 			let place=document.getElementById("place").value;
 			let description=document.getElementById("description").value;
-			postevent(name,date,hourbegin,hourend,place,description,image);
-		setTimeout(() => {window.location.href = 'index.html';}, 2000);
+		    getLatLong(places(place), (data)=>{
+				console.log(data);
+				postevent(name,date,hourbegin,hourend,place,description,image,data['lat'],data['lng']);
+			});
+	
 	  }
 	);
 };	

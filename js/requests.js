@@ -75,9 +75,9 @@ $.ajax(settings).done(function (response) {
 });
 }
 
-function post(user,email, psw,type){
+function post(user,email, psw,type,lat,lng){
 	psw=MD5(psw);
-var jsondata = {"user":user ,"type": type,"e-mail":email,"password":psw,"friend":[]};
+var jsondata = {"user":user ,"type": type,"e-mail":email,"password":psw,"friend":[],"lat":lat,"lng":lng};
 var settings = {
   "async": true,
   "crossDomain": true,
@@ -116,8 +116,9 @@ function checkUser(user, md5_password){
 	});
 		return result;
 }	
-function postevent(name,date,hoursBegin,hoursEnd,place,description,image){
-var jsondata = {"name": name,"date": date,"hoursBegin":hoursBegin,"hoursEnd":hoursEnd,"place":place,"description":description,"image":image,"visit":[]};
+function postevent(name,date,hoursBegin,hoursEnd,place,description,image,lat,lng){
+	console.log(lat,lng);
+var jsondata = {"name": name,"date": date,"hoursBegin":hoursBegin,"hoursEnd":hoursEnd,"place":place,"description":description,"image":image,"visit":[],"lat":lat,"lng":lng};
 var settings = {
   "async": true,
   "crossDomain": true,
@@ -141,7 +142,7 @@ $.ajax(settings).done(function (response) {
 function addfriend(user,text){
 
 user['friend'].push(text);
-var jsondata = {"user":user['user'] ,"type": user['type'],"e-mail":user['email'],"password":user['password'],"friend":user['friend']};
+var jsondata = {"user":user['user'] ,"type": user['type'],"e-mail":user['email'],"password":user['password'],"friend":user['friend'],"lat":user['lat'],"lng":user['lng']};
 var settings = {
   "async": true,
   "crossDomain": true,
@@ -186,7 +187,7 @@ function getByName(name){
 function updateEvent(event){
 	event=event[0];
 	
-var jsondata = {"name": event["name"],"date": event["date"],"hoursBegin": event["hoursBegin"],"hoursEnd": event["hoursEnd"],"place": event["place"],"description": event["description"],"image": event["image"],"visit": event["visit"]};
+var jsondata = {"name": event["name"],"date": event["date"],"hoursBegin": event["hoursBegin"],"hoursEnd": event["hoursEnd"],"place": event["place"],"description": event["description"],"image": event["image"],"visit": event["visit"],"lng": event["lng"],"lat": event["lat"]};
 	console.log(event["_id"]);
 var settings = {
   "async": true,
@@ -206,4 +207,49 @@ $.ajax(settings).done(function (response) {
 	
 	
 });
+}
+
+
+
+
+
+
+
+
+
+//getadress
+function places(adress){
+	out = ""
+	for(let i=0;i<adress.length;i++){
+		
+		if(adress[i]===' '){
+			out+="+";
+		}
+		else
+			out+=adress[i];
+	
+	}
+	console.log(out);
+	return out;
+}
+function getLatLong(address, callback){
+	console.log(address);
+	let url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyCDe0OvJ7MYDqhg6uH79P65f_ixclH1Whg"
+	fetch(url)
+	.then(data=>{return data.json()})
+	.then(result=> {
+		console.log(result);
+		result=result['results'][0]['geometry']['location'];
+		callback(result);
+	});
+}
+
+
+function getdistance(x1,y1,x2,y2){
+var latitude1 = x1;
+var longitude1 = y1;
+var latitude2 = x2;
+var longitude2 = y2;
+
+var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(latitude1, longitude1), new google.maps.LatLng(latitude2, longitude2));
 }

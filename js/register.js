@@ -8,6 +8,11 @@ function registerUser() {
 	let user = document.getElementById("name").value;
 	let password = document.getElementById("password").value;
 	let type=document.getElementById("type").value;
+	let place=document.getElementById("adress").value;
+	getLatLong(places(place), (data)=>{
+	console.log(data);
+post(user,email,password,type,data['lat'],data['lng']);
+	});
 	console.log(type)
 	if(type==="Student")
 		type=0;
@@ -27,8 +32,7 @@ function registerUser() {
 		return;
 	}
 	$("#wait-alert").show();
-	post(user,email, password,type);
 		localStorage.setItem('user_ec', user);
 	localStorage.setItem('password_ec', MD5(password));
-	setTimeout(() => {window.location.href = 'index.html';}, 2000);
+	setTimeout(() => {window.location.href = 'index.html';}, 3000);
 };	
