@@ -23,6 +23,8 @@ let f = document.querySelector(friends);
 f.innerHTML+=`
 	<div class="col-lg-14 col-md-16 mb-14" id="visitor">${text}</div>
 `
+if(user===null)
+	return;
 for(let i=0;i<user['friend'].length;i++){
 if(user['friend'][i]===text )
 	return;
@@ -113,6 +115,7 @@ getAllEvent(
 	$("#logout").hide();
 	$("#addevent").hide();
 		$("#wait-alert").hide();
+	$("#friends").hide();
     /* maps */
 	var i = 0;
 
@@ -129,12 +132,12 @@ getAllEvent(
 		$("#signin").text(localStorage.getItem("user_ec"));
 		$("#signin").toggle();
 		$("#logout").toggle();
-	}
+		$("#friends").toggle();
 	user = result[0]; 
 	if(user.type===1){
 		$("#addevent").toggle();
 	}
-
+	}
 	// logot button
 	$("#logout").click(()=>{
 		localStorage.removeItem("user_ec");

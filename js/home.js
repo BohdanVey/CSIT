@@ -9,7 +9,7 @@ $(document).ready(function(e) {
 	 $("#signout2").hide();
 	$("#logout").hide();
 	$("#addevent").hide();
-	
+		$("#friends").hide();
 	user = localStorage.getItem("user_ec");
 	let password = localStorage.getItem("password_ec");
 	let result = checkUser(user, password);
@@ -19,6 +19,7 @@ $(document).ready(function(e) {
 		$("#signin").text(localStorage.getItem("user_ec"));
 		$("#signin").toggle();
 		$("#logout").toggle();
+		$("#friends").toggle();
 	user = result[0]; 
 		$("#addevent").toggle();
 	

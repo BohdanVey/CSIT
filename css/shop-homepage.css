@@ -18,7 +18,7 @@ body {
   font-size: 16px;
 }
 .buttonfriend {
-	width: 15%;
+	width: 25%;
 
     float: right;
   background-color: blue;
@@ -35,7 +35,7 @@ body {
 #visitor{
 	font-size: 15px;	
 	 float: left;
-	width:85%;
+	widows: 7px;5%;
 font-family: serif;
 font-family: sans-serif;
 font-family: monospace;

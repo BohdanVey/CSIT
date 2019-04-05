@@ -11,6 +11,7 @@ function loginUser() {
 			$("#wait-alert").hide();
 		$("#wrong-alert").text("User name or password incorrect!");
 		$("#wrong-alert").show();
+		setTimeout(() => {$("#wrong-alert").hide();}, 2000);
 		return;
 	}
 	localStorage.setItem('user_ec', login);
