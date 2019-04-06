@@ -1,4 +1,4 @@
-function getAll() {
+function getAll(callback) {
 
 var settings = {
   "async": true,
@@ -14,6 +14,7 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
   console.log(response);
+	callback(response);
 });
 }
 function getByEmail(email){
@@ -75,9 +76,11 @@ $.ajax(settings).done(function (response) {
 });
 }
 
-function post(user,email, psw,type,lat,lng){
+function post(user,email, psw,type,lat,lng,distance){
 	psw=MD5(psw);
-var jsondata = {"user":user ,"type": type,"e-mail":email,"password":psw,"friend":[],"lat":lat,"lng":lng};
+	console.log(distance,"post");
+var jsondata = {"user":user ,"type": type,"e-mail":email,"password":psw,"friend":[],"lat":lat,"lng":lng,"distance":distance};
+console.log(jsondata);
 var settings = {
   "async": true,
   "crossDomain": true,
@@ -94,6 +97,9 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
   console.log(response);
+		localStorage.setItem('user_ec', user);
+	localStorage.setItem('password_ec', psw);
+	window.location.href = 'index.html';
 });
 }
 function checkUser(user, md5_password){
@@ -134,7 +140,9 @@ var settings = {
 }
 
 $.ajax(settings).done(function (response) {
-  console.log(response);
+		updateALLusers(response['lat'],response['lng'],response["_id"],()=>{
+				//window.location.href="index.html";
+				});
 });
 }
 
@@ -142,7 +150,7 @@ $.ajax(settings).done(function (response) {
 function addfriend(user,text){
 
 user['friend'].push(text);
-var jsondata = {"user":user['user'] ,"type": user['type'],"e-mail":user['email'],"password":user['password'],"friend":user['friend'],"lat":user['lat'],"lng":user['lng']};
+var jsondata = {"user":user['user'] ,"type": user['type'],"e-mail":user['email'],"password":user['password'],"friend":user['friend'],"lat":user['lat'],"lng":user['lng'],"distance":user['distance']};
 var settings = {
   "async": true,
   "crossDomain": true,
@@ -161,6 +169,25 @@ $.ajax(settings).done(function (response) {
 });
 }
 
+function update(user){
+var jsondata = {"user":user['user'] ,"type": user['type'],"e-mail":user['email'],"password":user['password'],"friend":user['friend'],"lat":user['lat'],"lng":user['lng'],"distance":user['distance']};
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://csitproject-61e2.restdb.io/rest/csit/"+ user["_id"] ,
+  "method": "PUT",
+  "headers": {
+    "content-type": "application/json",
+    "x-apikey": "5c83f68fcac6621685acbd15",
+    "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": JSON.stringify(jsondata)
+}
+$.ajax(settings).done(function (response) {
+	console.log(response);
+});
+}
 
 function getByName(name){
 	let result = [];
@@ -243,13 +270,48 @@ function getLatLong(address, callback){
 		callback(result);
 	});
 }
+function getALLdistanceToEvent(lat1,lon1, callback){
+let events=[];
+	getAllEvent(
+	(response) => {
+		console.log(response);
+		for(let i=0;i<response.length;i++){
+			console.log(response[i],response[i]['_id'],response[i]['lat'],response[i]['lng']);
+			events.push(response[i]["_id"]);
+			events.push(getDistanceFromLatLonInKm(lat1,lon1,response[i]['lat'],response[i]['lng']));
+		}
+		console.log(events);
+		callback(events);
+	});	
+}
+function updateALLusers(lat1,lon1,id, callback){
+		getAll(
+	(response) => {
+		console.log(response);
+		console.log("SHIT");
+		for(let i=0;i<response.length;i++){
+			response[i]['distance'].push(id);
+			response[i]['distance'].push(getDistanceFromLatLonInKm(response[i]["lat"],response[i]["lng"],lat1,lon1));
+			
+			update(response[i]);
+		}
+		callback();
+	});		
+}
+function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1); 
+  var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+  return d;
+}
 
-
-function getdistance(x1,y1,x2,y2){
-var latitude1 = x1;
-var longitude1 = y1;
-var latitude2 = x2;
-var longitude2 = y2;
-
-var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(latitude1, longitude1), new google.maps.LatLng(latitude2, longitude2));
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
 }

@@ -9,10 +9,7 @@ function registerUser() {
 	let password = document.getElementById("password").value;
 	let type=document.getElementById("type").value;
 	let place=document.getElementById("adress").value;
-	getLatLong(places(place), (data)=>{
-	console.log(data);
-post(user,email,password,type,data['lat'],data['lng']);
-	});
+
 	console.log(type)
 	if(type==="Student")
 		type=0;
@@ -23,16 +20,24 @@ post(user,email,password,type,data['lat'],data['lng']);
 		$("#wait-alert").hide();
 		$("#wrong-alert").text("Email already exists!");
 		$("#wrong-alert").show();
+			setTimeout(() => {$("#wrong-alert").hide();}, 2000);
 		return;
 	}
 	if(getByLogin(user).length != 0){
 		$("#wait-alert").hide();
 		$("#wrong-alert").text("Login already exists!");
 		$("#wrong-alert").show();
+		setTimeout(() => {$("#wrong-alert").hide();}, 2000);
 		return;
 	}
 	$("#wait-alert").show();
 		localStorage.setItem('user_ec', user);
 	localStorage.setItem('password_ec', MD5(password));
-	setTimeout(() => {window.location.href = 'index.html';}, 3000);
+	getLatLong(places(place), (data)=>{
+	console.log(data);
+		getALLdistanceToEvent(data['lat'],data['lng'], (distance)=>{
+			console.log(distance);
+			post(user,email,password,type,data['lat'],data['lng'],distance);
+		});
+	});
 };	
