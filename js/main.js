@@ -1,3 +1,14 @@
+	function getadress(text){
+		a="https://www.google.com/maps/place/";
+
+		for(var j=0;j<text.length;j++){
+			if(text[j]==' ')
+				a+='+';
+			else
+				a+=text[j];
+		}
+		return a;
+	}
 function time(k){
 	x="#wrong-alert"+k;
 	setTimeout(() => {$(x).hide();}, 2000);
@@ -23,7 +34,7 @@ let f = document.querySelector(friends);
 f.innerHTML+=`
 	<div class="col-lg-14 col-md-16 mb-14" id="visitor">${text}</div>
 `
-if(user===null)
+if(user===null || user['friend']===undefined)
 	return;
 for(let i=0;i<user['friend'].length;i++){
 if(user['friend'][i]===text )
@@ -51,22 +62,10 @@ f.innerHTML+=`
 		updateEvent(a);
 		addToK(k,user['user']);
 	}
-$(document).ready(function(e) {
-		
-		$("#wait-alert").show();
-	function getadress(text){
-		a="https://www.google.com/maps/place/"
-		for(var j=0;j<text.length;j++){
-			if(text[j]==' ')
-				a+='+';
-			else
-				a+=text[j];
-		}
-		return a;
-	}
+
 	function newdiv(a, k) {
 	let container = document.querySelector("#container");
-	console.log(a);
+	console.log(a['place']+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	text=getadress(a['place']);
 	container.innerHTML += `<div class="col-lg-14 col-md-16 mb-14 full-width">
             <div class="card h-100">
@@ -78,6 +77,7 @@ $(document).ready(function(e) {
                 <h5>${a['date']}</h5>
 				  <h5>${a['hoursBegin']}-${a['hoursEnd']}</h5>
 				   <a id="href${k}" href="${text}" ><h5 id="text${k}">${a['place']}</h5></a>
+		<h5>${getDistanceFromLatLonInKm(user['lat'],user['lng'],a['lat'],a['lng'])} kilometers</h5>
                 <p class="card-text">${a['description']}</p>
 				<h5>VISITORS:</h5>
 				</div>
@@ -100,6 +100,13 @@ $(document).ready(function(e) {
 	hr="href"+k;
 	k+=1;
 }
+
+
+
+$(document).ready(function(e) {
+		
+		$("#wait-alert").show();
+
 getAllEvent(
 	(response) => {
 		for(let i=0;i<response.length;i++){
@@ -127,6 +134,8 @@ getAllEvent(
 	if( user === null || password === null || result.length == 0) {
 		$("#signout").toggle();
 		$("#signout2").toggle();
+			$("#distance").toggle();
+			$("#finddist").toggle();
 	}
 	else{
 		$("#signin").text(localStorage.getItem("user_ec"));

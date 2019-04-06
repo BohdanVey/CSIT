@@ -17,6 +17,29 @@ $.ajax(settings).done(function (response) {
 	callback(response);
 });
 }
+function getEventByID(id,callback){
+	let result = [];
+	let settings = {
+		"async": false,
+		"crossDomain": true,
+		"url": 'https://csitproject-61e2.restdb.io/rest/event?q={"_id": "' + id + '"}',
+		"method": "GET",
+		"headers": {
+			"content-type": "application/json",
+			"x-apikey": "5c83f68fcac6621685acbd15",
+			"cache-control": "no-cache"
+		}
+	}
+
+	$.ajax(settings).done(function (response) {
+		result = response;
+		callback(response);
+	});
+	return result;
+}
+
+
+
 function getByEmail(email){
 	let result = [];
 	let settings = {
@@ -79,6 +102,7 @@ $.ajax(settings).done(function (response) {
 function post(user,email, psw,type,lat,lng,distance){
 	psw=MD5(psw);
 	console.log(distance,"post");
+	distance.toJSON;
 var jsondata = {"user":user ,"type": type,"e-mail":email,"password":psw,"friend":[],"lat":lat,"lng":lng,"distance":distance};
 console.log(jsondata);
 var settings = {
@@ -140,9 +164,7 @@ var settings = {
 }
 
 $.ajax(settings).done(function (response) {
-		updateALLusers(response['lat'],response['lng'],response["_id"],()=>{
-				//window.location.href="index.html";
-				});
+		updateALLusers(response['lat'],response['lng'],response["_id"]);
 });
 }
 
@@ -169,7 +191,7 @@ $.ajax(settings).done(function (response) {
 });
 }
 
-function update(user){
+function update(user,callback){
 var jsondata = {"user":user['user'] ,"type": user['type'],"e-mail":user['email'],"password":user['password'],"friend":user['friend'],"lat":user['lat'],"lng":user['lng'],"distance":user['distance']};
 var settings = {
   "async": true,
@@ -185,7 +207,7 @@ var settings = {
   "data": JSON.stringify(jsondata)
 }
 $.ajax(settings).done(function (response) {
-	console.log(response);
+	callback();
 });
 }
 
@@ -284,18 +306,23 @@ let events=[];
 		callback(events);
 	});	
 }
-function updateALLusers(lat1,lon1,id, callback){
+function updateALLusers(lat1,lon1,id){
 		getAll(
 	(response) => {
+		let j=0;
 		console.log(response);
 		console.log("SHIT");
 		for(let i=0;i<response.length;i++){
 			response[i]['distance'].push(id);
 			response[i]['distance'].push(getDistanceFromLatLonInKm(response[i]["lat"],response[i]["lng"],lat1,lon1));
-			
-			update(response[i]);
+			update(response[i],()=>{
+				   j++;
+				   console.log(j);
+				   if(j===response.length-1);
+						setTimeout(() => {window.location.href='index.html';}, 4000);
+				   });
 		}
-		callback();
+		
 	});		
 }
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
@@ -309,6 +336,9 @@ function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
     ; 
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
   var d = R * c; // Distance in km
+	d*=100;
+	d=Math.round(d);
+	d/=100;
   return d;
 }
 

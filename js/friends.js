@@ -49,10 +49,7 @@ f.innerHTML+=`
 		updateEvent(a);
 		addToK(k,user['user']);
 	}
-$(document).ready(function(e) {
-		
-		$("#wait-alert").show();
-	function getadress(text){
+function getadress(text){
 		a="https://www.google.com/maps/place/"
 		for(var j=0;j<text.length;j++){
 			if(text[j]==' ')
@@ -87,6 +84,7 @@ $(document).ready(function(e) {
                 <h5>${a['date']}</h5>
 				  <h5>${a['hoursBegin']}-${a['hoursEnd']}</h5>
 				   <a id="href${k}" href="${text}" ><h5 id="text${k}">${a['place']}</h5></a>
+					<h5>${getDistanceFromLatLonInKm(user['lat'],user['lng'],a['lat'],a['lng'])} kilometers</h5>
                 <p class="card-text">${a['description']}</p>
 				<h5>VISITORS:</h5>
 				</div>
@@ -109,6 +107,10 @@ $(document).ready(function(e) {
 	hr="href"+k;
 	k+=1;
 }
+$(document).ready(function(e) {
+		
+		$("#wait-alert").show();
+	
 getAllEvent(
 	(response) => {
 		for(let i=0;i<response.length;i++){

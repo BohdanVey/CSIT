@@ -94,6 +94,7 @@ f.innerHTML+=`
                 <h5>${a['date']}</h5>
 				  <h5>${a['hoursBegin']}-${a['hoursEnd']}</h5>
 				   <a id="href${k}" href="${text}" ><h5 id="text${k}">${a['place']}</h5></a>
+					<h5>${getDistanceFromLatLonInKm(user['lat'],user['lng'],a['lat'],a['lng'])} kilometers</h5>
                 <p class="card-text">${a['description']}</p>
 				<h5>VISITORS:</h5>
 				</div>
