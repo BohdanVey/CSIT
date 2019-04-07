@@ -164,7 +164,7 @@ var settings = {
 }
 
 $.ajax(settings).done(function (response) {
-		updateALLusers(response['lat'],response['lng'],response["_id"]);
+	window.location.href="index.html";
 });
 }
 
@@ -172,7 +172,7 @@ $.ajax(settings).done(function (response) {
 function addfriend(user,text){
 
 user['friend'].push(text);
-var jsondata = {"user":user['user'] ,"type": user['type'],"e-mail":user['email'],"password":user['password'],"friend":user['friend'],"lat":user['lat'],"lng":user['lng'],"distance":user['distance']};
+var jsondata = {"user":user['user'] ,"type": user['type'],"e-mail":user['email'],"password":user['password'],"friend":user['friend'],"lat":user['lat'],"lng":user['lng']};
 var settings = {
   "async": true,
   "crossDomain": true,
@@ -192,7 +192,7 @@ $.ajax(settings).done(function (response) {
 }
 
 function update(user,callback){
-var jsondata = {"user":user['user'] ,"type": user['type'],"e-mail":user['email'],"password":user['password'],"friend":user['friend'],"lat":user['lat'],"lng":user['lng'],"distance":user['distance']};
+var jsondata = {"user":user['user'] ,"type": user['type'],"e-mail":user['email'],"password":user['password'],"friend":user['friend'],"lat":user['lat'],"lng":user['lng']};
 var settings = {
   "async": true,
   "crossDomain": true,
@@ -306,25 +306,7 @@ let events=[];
 		callback(events);
 	});	
 }
-function updateALLusers(lat1,lon1,id){
-		getAll(
-	(response) => {
-		let j=0;
-		console.log(response);
-		console.log("SHIT");
-		for(let i=0;i<response.length;i++){
-			response[i]['distance'].push(id);
-			response[i]['distance'].push(getDistanceFromLatLonInKm(response[i]["lat"],response[i]["lng"],lat1,lon1));
-			update(response[i],()=>{
-				   j++;
-				   console.log(j);
-				   if(j===response.length-1);
-						setTimeout(() => {window.location.href='index.html';}, 4000);
-				   });
-		}
-		
-	});		
-}
+
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2-lat1);  // deg2rad below
