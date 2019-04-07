@@ -6,9 +6,12 @@ function getBase64(file) {
     reader.onerror = error => reject(error);
   });
 }
-
+let inProgress=0;
 
 function addevent() {
+	if(inProgress===1)
+		return;
+	inProgress=1;
 	let file=document.getElementById("image").files[0];
 	getBase64(file).then(
 	  image => {
