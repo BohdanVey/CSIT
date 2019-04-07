@@ -1,16 +1,16 @@
-$(document).ready(function(e) {	
-$("#wrong-alert").hide();
-		$("#wait-alert").hide();
-});
-function loginUser() {
-	$("#wait-alert").show();
-	let login = document.getElementById("name").value;
-	let password = document.getElementById("password").value;
-    let result = checkUser(login, MD5(password));
-	if( login === null || password === null || result.length == 0) {
+	$(document).ready(function(e) {	
+	$("#wrong-alert").hide();
 			$("#wait-alert").hide();
-		$("#wrong-alert").text("User name or password incorrect!");
-		$("#wrong-alert").show();
+	});
+	function loginUser() {
+		$("#wait-alert").show();
+		let login = document.getElementById("name").value;
+		let password = document.getElementById("password").value;
+		let result = checkUser(login, MD5(password));
+		if( login === null || password === null || result.length == 0) {
+				$("#wait-alert").hide();
+			$("#wrong-alert").text("User name or password incorrect!");
+			$("#wrong-alert").show();
 		setTimeout(() => {$("#wrong-alert").hide();}, 2000);
 		return;
 	}

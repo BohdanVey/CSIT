@@ -132,10 +132,7 @@ getAllEvent(
 	let password = localStorage.getItem("password_ec");
 	let result = checkUser(user, password);
 	if( user === null || password === null || result.length == 0) {
-		$("#signout").toggle();
-		$("#signout2").toggle();
-			$("#distance").toggle();
-			$("#finddist").toggle();
+		window.location.href="login.html";
 	}
 	else{
 		$("#signin").text(localStorage.getItem("user_ec"));
