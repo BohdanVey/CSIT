@@ -103,7 +103,7 @@ function post(user,email, psw,type,lat,lng,distance){
 	psw=MD5(psw);
 	console.log(distance,"post");
 	distance.toJSON;
-var jsondata = {"user":user ,"type": type,"e-mail":email,"password":psw,"friend":[],"lat":lat,"lng":lng,"distance":distance};
+var jsondata = {"user":user ,"type": type,"e-mail":email,"password":psw,"friend":[],"lat":lat,"lng":lng,"distance":distance,who:[],where:[]};
 console.log(jsondata);
 var settings = {
   "async": true,
@@ -170,9 +170,8 @@ $.ajax(settings).done(function (response) {
 
 
 function addfriend(user,text){
-
 user['friend'].push(text);
-var jsondata = {"user":user['user'] ,"type": user['type'],"e-mail":user['email'],"password":user['password'],"friend":user['friend'],"lat":user['lat'],"lng":user['lng']};
+var jsondata = {"user":user['user'] ,"type": user['type'],"e-mail":user['email'],"password":user['password'],"friend":user['friend'],"lat":user['lat'],"lng":user['lng'],"who":user['who'],"where":user['where']};
 var settings = {
   "async": true,
   "crossDomain": true,
@@ -191,8 +190,8 @@ $.ajax(settings).done(function (response) {
 });
 }
 
-function update(user,callback){
-var jsondata = {"user":user['user'] ,"type": user['type'],"e-mail":user['email'],"password":user['password'],"friend":user['friend'],"lat":user['lat'],"lng":user['lng']};
+function update(user){
+var jsondata = {"user":user['user'] ,"type": user['type'],"e-mail":user['email'],"password":user['password'],"friend":user['friend'],"lat":user['lat'],"lng":user['lng'],"who":user['who'],"where":user['where']};
 var settings = {
   "async": true,
   "crossDomain": true,
@@ -207,9 +206,11 @@ var settings = {
   "data": JSON.stringify(jsondata)
 }
 $.ajax(settings).done(function (response) {
-	callback();
+	let x=document.querySelector(a['getId']);
 });
 }
+
+
 
 function getByName(name){
 	let result = [];

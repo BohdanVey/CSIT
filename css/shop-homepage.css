@@ -3,6 +3,8 @@
  * Copyright 2013-2019 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
  */
+
+
 #distance{
  margin:0 auto;
     display:block;
@@ -19,24 +21,37 @@ body {
   padding-top: 56px;
 }
 .button {
-	max-width: 150px;
-	text-align: center;
   background-color: burlywood;
-  border: none;
-  color: white;
+
   padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
+
+		width: 25%;
+    float: left;
+}
+.yes{
+	background-color: crimson;
+}
+.yess{
+	color: crimson;
+}
+.button1{
+  background-color: burlywood;
+  padding: 15px 32px;
   font-size: 16px;
+}
+.invite{
+
+  background-color: darkturquoise;
+  padding: 15px 32px;
+	width: 25%;
+    float: right;
 }
 .buttonfriend {
 	width: 25%;
-
     float: right;
   background-color: blue;
   border: none;
   color: skyblue;
-
   text-decoration: none;
   font-size: 15px;	
 	
