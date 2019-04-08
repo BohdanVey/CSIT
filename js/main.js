@@ -90,8 +90,8 @@ console.log(fr['who'],fr['where'],user['user'],where);
 f.innerHTML+=`
 <button class="buttonfriend button4 ${text}" onclick="invitefriends('${text1}','${user['user']}','${where}')" id="${text}">Invite friend</button>
 `
-f.innerHTML+=`</br class=${text}>`;
-f.innerHTML+=`</br class=${text}>`;
+f.innerHTML+=`<br class=${text}>`;
+f.innerHTML+=`<br class=${text}>`;
 	}
 
 
