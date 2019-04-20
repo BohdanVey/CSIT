@@ -10,6 +10,21 @@
 	font-size: 30px;
 }
 
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 90%;
+		float: left;
+		  position: relative;
+		z-index: 0;
+       }
+
+#br1{
+	height: 300px;
+}
+#inner2{
+
+	z-index: 1000;
+} 
 #distance{
  margin:0 auto;
     display:block;

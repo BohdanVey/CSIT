@@ -1,4 +1,186 @@
-	function getadress(text){
+var map
+let user=null;
+var IT=[];
+var Dance=[];
+var Meeting=[];
+var Sport=[];
+var Another=[];
+var IT1=[];
+var Dance1=[];
+var Meeting1=[];
+var Sport1=[];
+var Another1=[];
+function FIT(x){
+	var tr=document.getElementById("IT");
+	console.log(tr.checked);
+	if(tr.checked===true){
+		for(i=0;i<IT1.length;i++){
+			addmarker(IT1[i]['lat'],IT1[i]['lng'],IT1[i]['toscroll'],"IT",1);
+		}
+	}
+	else{
+		for (i = 0; i<IT.length; i++){
+        IT[i].setMap(null);
+    }
+		IT=[];
+}
+	if(x==0)
+	distancePic();
+	}
+function FDance(x){
+	var tr=document.getElementById("Dance");
+	console.log(tr.checked);
+	if(tr.checked===true){
+		for(i=0;i<Dance1.length;i++){
+			addmarker(Dance1[i]['lat'],Dance1[i]['lng'],Dance1[i]['toscroll'],"Dance",1);
+		}
+	}
+	else{
+		for (i = 0; i<Dance.length; i++){
+        Dance[i].setMap(null);
+    }
+		Dance=[];
+}
+	if(x==0)
+	distancePic();
+	}
+function FMeeting(x){
+	var tr=document.getElementById("Meeting");
+	console.log(tr.checked);
+	if(tr.checked===true){
+		for(i=0;i<Meeting1.length;i++){
+			addmarker(Meeting1[i]['lat'],Meeting1[i]['lng'],Meeting1[i]['toscroll'],"Meeting",1);
+		}
+	}
+	else{
+		for (i = 0; i<Meeting.length; i++){
+        Meeting[i].setMap(null);
+    }
+		Meeting=[];
+}
+	if(x==0)
+	distancePic();
+	}
+function FSport(x){
+	var tr=document.getElementById("Sport");
+	console.log(tr.checked);
+	if(tr.checked===true){
+		for(i=0;i<Sport1.length;i++){
+			addmarker(Sport1[i]['lat'],Sport1[i]['lng'],Sport1[i]['toscroll'],"Sport",1);
+		}
+	}
+	else{
+		for (i = 0; i<Sport.length; i++){
+        Sport[i].setMap(null);
+    }
+		Sport=[];
+}
+	if(x==0)
+	distancePic();
+	}
+function FAnother(x){
+	var tr=document.getElementById("Another");
+	console.log(tr.checked);
+	if(tr.checked===true){
+		for(i=0;i<Another1.length;i++){
+			addmarker(Another1[i]['lat'],Another1[i]['lng'],Another1[i]['toscroll'],"Another",1);
+		}
+	}
+	else{
+		for (i = 0; i<Another.length; i++){
+        Another[i].setMap(null);
+    }
+		Another=[];
+}
+	if(x==0)
+	distancePic();
+	}
+function addmarker(lat,lng,toscroll,type,x){
+	lat=parseFloat(lat);
+	lng=parseFloat(lng);
+	var u;
+	console.log(u);
+  var uluru = {lat: lat, lng: lng};
+	var ulur={lat:lat,lng:lng,toscroll:toscroll}
+		if(type==="IT"){
+      u="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+	}
+	if(type==="Dance"){
+	u="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
+
+	}
+			if(type==="Meeting"){
+     u= "http://maps.google.com/mapfiles/ms/icons/pink-dot.png"
+
+	}
+				if(type==="Sport"){
+
+      u= "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+    
+	}
+					if(type==="Another"){
+
+      u="http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+    
+	}
+	console.log(lat,lng,map);
+	marker = new google.maps.Marker({
+		position: uluru,
+		map: map,
+		    icon: {
+      url: u
+    }
+	});
+	google.maps.event.addListener(marker, 'click', function() { 
+	           var x = $(toscroll).position();
+		var x1=$("#maincontainer").position();
+				console.log(toscroll,x.left,x.top,x1.left,x1.top);
+                    window.scrollTo(x1.left+x.left,x1.top+x.top);
+	});
+
+
+	if(type==="IT"){
+ IT.push(marker);
+			if(x===0)
+		IT1.push({lat:lat,lng:lng,toscroll:toscroll});
+	}
+	if(type==="Dance"){
+   Dance.push(marker);
+			if(x===0)
+		Dance1.push({lat:lat,lng:lng,toscroll:toscroll});
+		
+	}
+			if(type==="Meeting"){
+     Meeting.push(marker);
+					if(x===0)
+				Meeting1.push({lat:lat,lng:lng,toscroll:toscroll});
+
+	}
+				if(type==="Sport"){
+
+    Sport.push(marker);
+						if(x===0)
+					Sport1.push({lat:lat,lng:lng,toscroll:toscroll});
+    
+	}
+					if(type==="Another"){
+   Another.push(marker);
+							if(x===0)
+						Another1.push({lat:lat,lng:lng,toscroll:toscroll});
+	}
+}
+function initMap() {
+  // The location of Uluru
+setTimeout(() => {
+  var uluru={lat:user['lat'],lng:user['lng']};
+  // The map, centered at Uluru
+  map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 20, center: uluru});
+});
+
+
+}
+function getadress(text){
 		a="https://www.google.com/maps/place/";
 
 		for(var j=0;j<text.length;j++){
@@ -13,14 +195,14 @@ function time(k){
 	x="#wrong-alert"+k;
 	setTimeout(() => {$(x).hide();}, 2000);
 }
-let user
+
 	function addnewfriends(text){
 			addfriend(user,text);
 
 			$("."+text).hide();
 	};
 	function addToK(k,text,i,where){
-		console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		
 		let q="#div"+k;
 		should='no';
 		for(let i=0;i<user['who'].length;i+=1)
@@ -33,7 +215,7 @@ let user
 	<div class="${friend} friend should"></div>
 `
 let friends=".N"+k+"friend"+i;
-console.log(friend,friends);
+
 			
 let f = document.querySelector(friends);
 f.innerHTML+=`
@@ -45,7 +227,7 @@ for(let i=0;i<user['friend'].length;i++){
 if(user['friend'][i]===text )
 	return;
 }
-console.log(text,user['user']);
+
 if(text===user['user'])
 	return;
 f.innerHTML+=`
@@ -58,7 +240,7 @@ f.innerHTML+=`
 		$("."+text1).hide();
 		e=getByLogin(text);
 		e=e[0];
-		console.log(e);
+	
 		e['who'].push(who);
 		e['where'].push(where);
 		update(e);
@@ -77,7 +259,7 @@ f.innerHTML+=`
 	<div class="${friend} friends"></div>
 `
 let friends=".N"+k+"friends"+i;
-console.log(friend,friends);
+
 let f = document.querySelector(friends);
 let text1=text;
 text=text+'qwerrewq';
@@ -85,7 +267,7 @@ f.innerHTML+=`
 	<div class="col-lg-14 col-md-16 mb-14 ${text}" id="visitor">${text1}</div>
 `
 
-console.log(fr['who'],fr['where'],user['user'],where);
+
 
 f.innerHTML+=`
 <button class="buttonfriend button4 ${text}" onclick="invitefriends('${text1}','${user['user']}','${where}')" id="${text}">Invite friend</button>
@@ -136,7 +318,7 @@ let used=[];
 		for(let i=0;i<user['friend'].length;i++){
 			d=0;
 				for(let j=0;j<a[0]['visit'].length;j++){
-					console.log(a[0]['visit'][j],user['friend'][i]);
+			
 			if(a[0]['visit'][j]===user['friend'][i]){
 				d=1;
 			}		
@@ -147,21 +329,21 @@ let used=[];
 				w+=1;
 			}
 		}
-console.log(w);
+
 	}
 function qqq(){
 			return;
 		}
 	function newdiv(a, k) {
-	
+	let q="#div"+k;
 	let container = document.querySelector("#container");
-	console.log(a['place']+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
 	text=getadress(a['place']);
 	should='no';
 	for(let i=0;i<user['where'].length;i++)
 		if(user['where'][i]===a['name'])
 			should='yes';
-	container.innerHTML += `<div class="col-lg-14 col-md-16 mb-14 full-width">
+	container.innerHTML += `<div class="col-lg-14 col-md-16 mb-14 full-width" id="height${k}">
             <div class="card h-100">
               <a href="#"><img class="card-img-top" src="${a['image']}" alt=""></a>
               <div class="card-body" id="${'div'+k}">
@@ -186,8 +368,10 @@ function qqq(){
 			  
           </div>
 `	
+	
 	$("#wrong-alert"+k).hide();
-	let q="#div"+k;
+		let height="#height"+k;
+		addmarker(a['lat'],a['lng'],height,a['type'],0);
 	let alertq="#wrong-alert"+k;
 	let divk = document.querySelector(q);
 	for(let i=0;i<a['visit'].length;i++){
@@ -203,13 +387,15 @@ $(document).ready(function(e) {
 		
 		$("#wait-alert").show();
 
-getAllEvent(
+	getAllEvent(
 	(response) => {
 		for(let i=0;i<response.length;i++){
 			newdiv(response[i], i);
 		}
+		
 	});	
-	
+
+
 	
 	
 	$("#signin").hide();

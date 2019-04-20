@@ -61,6 +61,28 @@
   </nav>
   <br>
   <br>
+  <div id="wrapper">
+    <div id="map">
+    </div>
+        <div id="inner2">
+    	<div><input type="checkbox" id="IT" onclick="FIT(0)" checked="checked" />
+    		IT
+			</div>
+      	<div><input type="checkbox" id="Dance" onclick="FDance(0)" checked="checked" />
+    		Dance
+			</div>
+			    	<div><input type="checkbox" id="Sport" onclick="FSport(0)" checked="checked" />
+    		Sport
+			</div>
+			   	<div><input type="checkbox" id="Meeting" onclick="FMeeting(0)" checked="checked" />
+    		Meeting
+			</div>
+			    	<div><input type="checkbox" id="Another" onclick="FAnother(0)" checked="checked" />
+    		Another
+			</div>
+    </div>
+</div>
+     <div id="br1"></div>
 <input type="range" oninput="change()" min="0" max="20" id="finddist" step="0.01">
 	<br>
  	<button onclick="distancePic()"  class="button1" id="distance" >10 kilometers</button>    
@@ -69,7 +91,7 @@
 
 
   <!-- Page Content -->
-  <div class="container">
+  <div id="maincontainer" class="container">
       <!-- /.col-lg-3 -->
 
       <div class="col-lg-9">
@@ -89,11 +111,14 @@
 
 
   <!-- Bootstrap core JavaScript -->
-  
+
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="js/Scale.js"></script>
 		<script src="js/main.js"></script>
+		      <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA31DE6YOy1Jdv3Wz4jIagAOBP_sKic_jM&callback=initMap">
+    </script>
 	<script src="js/requests.js"></script>
 </body>
 

@@ -146,9 +146,9 @@ function checkUser(user, md5_password){
 	});
 		return result;
 }	
-function postevent(name,date,hoursBegin,hoursEnd,place,description,image,lat,lng){
+function postevent(name,date,hoursBegin,hoursEnd,place,description,image,lat,lng,type){
 	console.log(lat,lng);
-var jsondata = {"name": name,"date": date,"hoursBegin":hoursBegin,"hoursEnd":hoursEnd,"place":place,"description":description,"image":image,"visit":[],"lat":lat,"lng":lng};
+var jsondata = {"name": name,"date": date,"hoursBegin":hoursBegin,"hoursEnd":hoursEnd,"place":place,"description":description,"image":image,"visit":[],"lat":lat,"lng":lng,"type":type};
 var settings = {
   "async": true,
   "crossDomain": true,
